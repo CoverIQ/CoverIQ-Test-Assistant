@@ -66,3 +66,52 @@ python ./RegressionTest/diff_parser.py https://github.com/CoverIQ/CoverIQ-Test-A
 
 python ./RegressionTest/diff_parser.py https://github.com/CoverIQ/CoverIQ-Test-Assistant --keep
 ```
+
+## 🧠 AST Analyzer
+
+This module performs static analysis on Python source code using the Abstract Syntax Tree (AST). It is primarily used to detect function-level changes across code versions and to build function-level call graphs for dependency tracking.
+
+---
+
+### ✨ Features
+
+- **Function Extraction**: Extracts all top-level functions and their full source bodies.
+- **Call Graph Construction**: Builds a call graph showing which functions call which.
+- **Change Detection**: Compares two versions of a file and identifies added, removed, and modified functions.
+- **Indirect Dependency Detection**: Finds functions that call modified ones (1-hop).
+
+---
+
+### 📚 Functions
+
+#### `extract_functions_with_body(code: str) -> Dict[str, str]`
+
+Parses the code and extracts each function's name and body.
+
+#### `build_call_graph(code: str) -> Dict[str, Set[str]]`
+
+Creates a dictionary mapping function names to the set of functions they call.
+
+#### `find_callers(target_funcs: List[str], call_graph: Dict[str, Set[str]]) -> Set[str]`
+
+Returns all functions that call any of the target functions (non-recursive).
+
+#### `analyze_ast_diff(before_code: str, after_code: str) -> Dict[str, List[str]]`
+
+Compares two versions of Python code and returns a dictionary with:
+- `added`: Newly introduced functions
+- `removed`: Deleted functions
+- `modified`: Changed functions
+- `indirect_dependents`: Functions that call modified ones
+
+### 🔧 Example Usage
+
+```python
+from ast_analyzer import analyze_ast_diff
+
+with open("before.py") as f1, open("after.py") as f2:
+    before_code = f1.read()
+    after_code = f2.read()
+
+diff = analyze_ast_diff(before_code, after_code)
+print(diff)
