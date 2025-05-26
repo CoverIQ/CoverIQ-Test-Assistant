@@ -29,6 +29,9 @@ Receives a comprehensive test plan with:Objective,Scope,Test Items,Test Types,Ac
 - bdd_style_test_case_generator.py
 Converts each test plan item into Gherkin-style BDD test cases
 
+- DocumentGenerator.py 
+Helper class for document generation. It is not included in main, but provides static methods for use. It generates markdown content for test plans and test cases, and creates feature files in a zip format. If needed, you can call these methods with the json files generated from previous steps.
+
 Supports both positive and negative scenarios
 
 - main.py
