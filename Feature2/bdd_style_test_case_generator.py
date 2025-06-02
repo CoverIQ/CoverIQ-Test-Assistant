@@ -24,7 +24,7 @@ def generate_test_case(test_plan: dict,api_key:str) -> dict:
             model='gemini-2.5-flash-preview-04-17',  
             contents=f'''
             test plan :{t},
-            Generate BDD-style positive and negative test scenarios necessary to ensure coverage of this test case in Gherkin syntax.
+            Generate BDD-style positive and negative test scenarios necessary to ensure coverage of this test case in Gherkin syntax.Try to preserve element IDs as much as possible.
             ''',
             config={
                 "response_mime_type": "application/json",     
