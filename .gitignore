@@ -159,3 +159,14 @@ report.md
 
 *.faiss
 metadata.json
+
+
+# Environment variables
+.env
+.env.*
+
+# Test data and generated files
+CoverIQ-BE/data/*
+!CoverIQ-BE/data/.gitkeep
+CoverIQ-BE/Feature2/test_plan_example.txt
+CoverIQ-BE/Feature2/test_case_example.txt
